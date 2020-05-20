@@ -3,5 +3,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('index', views.indexboards, name='indexboards'),
+    path('painel', views.indexboards, name='indexboards'),
+    path('questions', views.indexquestions, name='indexquestions'),
 ]
