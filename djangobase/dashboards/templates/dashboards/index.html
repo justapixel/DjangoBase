@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block content %}
+<div>
+  <h1>Embedding <span class="text-brand">Metabase</span> in Django</h1>
+
+  <div>
+    <iframe
+      src="{{iframe_url}}"
+      frameborder="0"
+      style="width: 100%; min-height: 100vh;"
+      allowtransparency
+    ></iframe>
+  </div>
+</div>
+{% endblock %}
