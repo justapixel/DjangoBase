@@ -1,0 +1,39 @@
+version: "3.7"
+
+services:
+  postgresdb:
+    image: postgres:12
+    container_name: postgredb
+    environment:
+      POSTGRES_USER: djangobase
+      POSTGRES_PASSWORD: djangobase123
+      POSTGRES_DB: djangobase
+    ports:
+      - "5432:5432"
+    volumes:
+      - postdb:/var/lib/postgresql/data
+
+  metabase:
+    image: metabase/metabase
+    container_name: metabaseapp
+    restart: always
+    ports:
+      - 3001:3000
+    volumes:
+      # declare your mount volume /host/dir:/container/dir
+      - metabse:/metabase-data
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: djangobase
+      MB_DB_PORT: 5432
+      MB_DB_USER: djangobase
+      MB_DB_PASS: djangobase123
+      MB_DB_HOST: postgredb
+    depends_on:
+      - postgresdb
+    links:
+      - postgresdb
+
+volumes:
+  metabse:
+  postdb:
