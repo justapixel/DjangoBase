@@ -6,7 +6,7 @@ METABASE_SITE_URL = "http://localhost:3001"
 METABASE_SECRET_KEY = "25f5798301232936a71cf67387adb92ac4a25684f5705d3d4053af3ba557f14b"
 
 
-def indexboards(request):
+def indexpanels(request):
     payload_peoples = {
         "resource": {"dashboard": 1},
         "params": {},
@@ -29,8 +29,8 @@ def indexboards(request):
     dashboard_reviews = METABASE_SITE_URL + "/embed/dashboard/" + \
         token.decode("utf8") + "#theme=night&bordered=false&titled=true"
 
-    return render(request, 'dashboards/index.html', {'dashboard_peoples': dashboard_peoples,
-                                                     'dashboard_reviews': dashboard_reviews})
+    return render(request, 'panels/index.html', {'dashboard_peoples': dashboard_peoples,
+                                                 'dashboard_reviews': dashboard_reviews})
 
 
 def indexquestions(request):
