@@ -48,7 +48,7 @@ def indexquestions(request):
 
     token = jwt.encode(payload, METABASE_SECRET_KEY, algorithm="HS256")
 
-    iframe_url = METABASE_SITE_URL + "/embed/question/" + \
+    iframe_question = METABASE_SITE_URL + "/embed/question/" + \
         token.decode("utf8") + "#theme=night&bordered=false&titled=true"
 
-    return render(request, 'dashboards/index.html', {'iframe_url': iframe_url})
+    return render(request, 'questions/index.html', {'iframe_question': iframe_question})
