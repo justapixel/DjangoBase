@@ -6,6 +6,10 @@ METABASE_SITE_URL = "http://localhost:3001"
 METABASE_SECRET_KEY = "25f5798301232936a71cf67387adb92ac4a25684f5705d3d4053af3ba557f14b"
 
 
+def indexpage(request):
+    return render(request, 'indexpage/index.html')
+
+
 def indexpanels(request):
     payload_peoples = {
         "resource": {"dashboard": 1},
