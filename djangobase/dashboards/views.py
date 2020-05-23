@@ -1,9 +1,7 @@
-import time
 from django.shortcuts import render
-import jwt
+from utils.utils import metabase_generate_token
 
 METABASE_SITE_URL = "http://localhost:3001"
-METABASE_SECRET_KEY = "25f5798301232936a71cf67387adb92ac4a25684f5705d3d4053af3ba557f14b"
 
 
 def indexpage(request):
@@ -11,44 +9,23 @@ def indexpage(request):
 
 
 def indexpanels(request):
-    payload_peoples = {
-        "resource": {"dashboard": 1},
-        "params": {},
-        "exp": round(time.time()) + (60 * 10)  # 10 minute expiration
-    }
-
-    payload_reviews = {
-        "resource": {"dashboard": 3},
-        "params": {},
-        "exp": round(time.time()) + (60 * 10)  # 10 minute expiration
-    }
-
-    token = jwt.encode(payload_peoples, METABASE_SECRET_KEY, algorithm="HS256")
 
     dashboard_peoples = METABASE_SITE_URL + "/embed/dashboard/" + \
-        token.decode("utf8") + "#theme=night&bordered=false&titled=true"
-
-    token = jwt.encode(payload_reviews, METABASE_SECRET_KEY, algorithm="HS256")
+        metabase_generate_token("dashboard", 1).decode(
+            "utf8") + "#theme=night&bordered=false&titled=true"
 
     dashboard_reviews = METABASE_SITE_URL + "/embed/dashboard/" + \
-        token.decode("utf8") + "#theme=night&bordered=false&titled=true"
+        metabase_generate_token("dashboard", 3).decode(
+            "utf8") + "#theme=night&bordered=false&titled=true"
 
     return render(request, 'panels/index.html', {'dashboard_peoples': dashboard_peoples,
                                                  'dashboard_reviews': dashboard_reviews})
 
 
 def indexquestions(request):
-    payload = {
-        "resource": {"question": 5},
-        "params": {
 
-        },
-        "exp": round(time.time()) + (60 * 10)  # 10 minute expiration
-    }
+    iframe_question_5 = METABASE_SITE_URL + "/embed/question/" + \
+        metabase_generate_token("question", 5).decode(
+            "utf8") + "#theme=night&bordered=false&titled=true"
 
-    token = jwt.encode(payload, METABASE_SECRET_KEY, algorithm="HS256")
-
-    iframe_question = METABASE_SITE_URL + "/embed/question/" + \
-        token.decode("utf8") + "#theme=night&bordered=false&titled=true"
-
-    return render(request, 'questions/index.html', {'iframe_question': iframe_question})
+    return render(request, 'questions/index.html', {'iframe_question_5': iframe_question_5})
