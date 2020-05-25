@@ -9,6 +9,7 @@ prospector = "*"
 [packages]
 django = "*"
 pyjwt = "*"
+django-environ = "*"
 
 [requires]
 python_version = "3.8"

@@ -1,7 +1,10 @@
+from environ import Env
 from django.shortcuts import render
 from utils.utils import metabase_generate_token
 
-METABASE_SITE_URL = "http://localhost:3001"
+env = Env()
+
+METABASE_SITE_URL = env('METABASE_SITE_URL')
 
 
 def indexpage(request):

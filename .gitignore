@@ -11,3 +11,4 @@ media
 ### Others ###
 .history
 .vscode
+.env
