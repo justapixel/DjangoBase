@@ -1,6 +1,8 @@
 from environ import Env
 from django.shortcuts import render
 from utils.utils import metabase_generate_token
+import jwt
+import time
 
 env = Env()
 
@@ -43,7 +45,12 @@ def indexquestions(request):
         metabase_generate_token("question", 22).decode(
             "utf8") + "#theme=night&bordered=false&titled=true"
 
+    iframe_question_25 = METABASE_SITE_URL + "/embed/question/" + \
+        metabase_generate_token("question", 25).decode(
+            "utf8") + "#theme=night&bordered=false&titled=true"
+
     return render(request, 'questions/index.html', {'iframe_question_4': iframe_question_4,
                                                     'iframe_question_5': iframe_question_5,
                                                     'iframe_question_17': iframe_question_17,
-                                                    'iframe_question_22': iframe_question_22})
+                                                    'iframe_question_22': iframe_question_22,
+                                                    'iframe_question_25': iframe_question_25})
